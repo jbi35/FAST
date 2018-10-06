@@ -11,6 +11,7 @@ ExternalProject_Add(dcmtk
         GIT_TAG "DCMTK-3.6.3"
         CMAKE_ARGS
             -DCMAKE_MACOSX_RPATH=ON
+            -DDCMTK_WITH_ICONV=OFF
             -DBUILD_SHARED_LIBS=ON
             -DBUILD_APPS=OFF
             -DDCMTK_WITH_DOXYGEN=OFF
