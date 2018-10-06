@@ -21,6 +21,8 @@ int main(int argc, char* argv[]) {
 	std::cout << "First argument "<< argv[1] << std::endl;
 	//std::cout << "Second argument "<< argv[2] << std::endl;
 	std::cout << "Third argument "<< argv[5] << std::endl;
+
+	//std::cout << "Forth argument "<< argv[6] << std::endl;
 	//exit(0);
 
 	// Import CT data
@@ -46,16 +48,20 @@ int main(int argc, char* argv[]) {
 	SurfaceExtraction::pointer extraction = SurfaceExtraction::New();
 	extraction->setInputConnection(segmentation->getOutputPort());
 
-	//VTKMeshFileExporter::pointer exporter = VTKMeshFileExporter::New();
-	//exporter->setInputConnection(centerline->getOutputPort());
-	//exporter->setFilename(argv[5]);
-
+	VTKMeshFileExporter::pointer exporter = VTKMeshFileExporter::New();
+	exporter->setInputConnection(centerline->getOutputPort());
+	exporter->setFilename(argv[5]);
 	//exporter->update(0);
 
+
+
 	MetaImageExporter::pointer exporter2 = MetaImageExporter::New();
-	exporter2->setFilename("image.mhd");
+	//exporter2->setFilename(argv[6]);
+	exporter2->setFilename(argv[6]);
 	exporter2->setInputConnection(segmentation->getOutputPort());
 	exporter2->update(0);
+	exporter->update(0);
+	//exit(0);
 
 	// Set up renderers and window
 	//TriangleRenderer::pointer renderer = TriangleRenderer::New();
@@ -76,5 +82,5 @@ int main(int argc, char* argv[]) {
 	// This will automatically close the window after 5 seconds, used for CI testing
   //  window->setTimeout(5*1000);
 //#endif
-//	window->start();
+	//window->start();
 }
